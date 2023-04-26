@@ -1,5 +1,25 @@
+const userService = require('../services/userService');
 
-const handleNewUser = async (req, res) => {
+const registerUser = async (req, res) => {
+  try {
+    const { name, email, pwd } = req.body;
+    const user = await userService.createUser({ name, email, pwd });
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    console.log(err.name)
+    // Handle validation errors
+    if (err.name === 'ValidationError') {
+      const errors = Object.values(err.errors).map(error => error.message);
+      return res.status(400).json({ message: errors });
+    }
+
+    // Handle conflict errors
+    if (err.name === 'MongoServerError' && err.code === 11000) {
+      return res.status(409).json({ message: 'Email already in use' });
+    }
+    // Handle other errors
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 }
 
-module.exports = { handleNewUser };
+module.exports = { registerUser };
