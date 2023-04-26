@@ -29,7 +29,14 @@ app.use(express.json());
 // middleware for cookies
 app.use(cookieParser())
 
+// ROTAS
+app.use('/register', require('./routes/register'));
+app.use('/login', require('./routes/login'));
+app.use('/refresh', require('./routes/refresh'))
+app.use('/logout', require('./routes/logout'))
 
+app.use(verifyJWT)
+//Protected Routes
 
 // Start
 mongoose.connection.once('open', () => {
