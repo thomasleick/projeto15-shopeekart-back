@@ -29,7 +29,7 @@ app.use(express.json());
 // middleware for cookies
 app.use(cookieParser())
 
-// ROTAS
+// Routes
 app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/login'));
 app.use('/refresh', require('./routes/refresh'))
