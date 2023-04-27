@@ -1,17 +1,17 @@
-require('dotenv').config();
-const express = require('express');
+require('dotenv').config()
+const express = require('express')
 const cors = require('cors')
 const corsOptions = require('./configs/corsOptions')
 const verifyJWT = require('./middlewares/verifyJWT')
 const cookieParser = require('cookie-parser')
-const mongoose = require('mongoose');
-const connectDB = require('./configs/dbConn');
+const mongoose = require('mongoose')
+const connectDB = require('./configs/dbConn')
 const credentials = require('./middlewares/credentials')
 
-const app = express();
+const app = express()
 
 // Connect to MongoDB
-connectDB();
+connectDB()
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
@@ -24,22 +24,25 @@ app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: false }))
 
 // built-in middleware for json
-app.use(express.json());
+app.use(express.json())
 
 // middleware for cookies
 app.use(cookieParser())
 
 // Routes
-app.use('/register', require('./routes/register'));
-app.use('/login', require('./routes/login'));
+app.use('/register', require('./routes/register'))
+app.use('/login', require('./routes/login'))
 app.use('/refresh', require('./routes/refresh'))
 app.use('/logout', require('./routes/logout'))
+app.use(require('./routes/products'))
 
 app.use(verifyJWT)
 //Protected Routes
 
 // Start
 mongoose.connection.once('open', () => {
-  console.log('Connected to MongoDB');
-  app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
-});
+    console.log('Connected to MongoDB')
+    app.listen(process.env.PORT, () =>
+        console.log(`Server running on port ${process.env.PORT}`)
+    )
+})
