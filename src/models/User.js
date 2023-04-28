@@ -19,6 +19,7 @@ const userSchema = new Schema({
         required: true,
         minlength: 3,
     },
+    refreshToken: String
 })
 
 userSchema.pre('save', async function (next) {
