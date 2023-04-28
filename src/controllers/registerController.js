@@ -6,7 +6,6 @@ const registerUser = async (req, res) => {
     const user = await userService.createUser({ name, email, pwd });
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    console.log(err.name)
     // Handle validation errors
     if (err.name === 'ValidationError') {
       const errors = Object.values(err.errors).map(error => error.message);
