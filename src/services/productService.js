@@ -4,8 +4,8 @@ const getCategories = async () => {
     return await Product.find().distinct('category')
 }
 
-const getProductCount = async () => {
-    return await Product.estimatedDocumentCount()
+const getProductCount = async (category) => {
+    return await Product.count(category && { category })
 }
 
 const getProduct = async (id) => {
