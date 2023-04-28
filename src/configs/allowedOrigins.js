@@ -1,7 +1,7 @@
 const allowedOrigins = [
-    'http://www.google.com', 
-    '127.0.0.1:5173', 
-    'http://localhost:5173',
+    process.env.ORIGIN0,
+    process.env.ORIGIN1,
+    process.env.ORIGIN2,
 ]
 
 module.exports = allowedOrigins
