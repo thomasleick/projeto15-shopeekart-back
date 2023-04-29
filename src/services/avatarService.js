@@ -1,6 +1,6 @@
 const { createCanvas } = require('canvas')
 function getRandomColor() {
-    const colors = ['#0080ff', '#ff00ff', '#ff0080', '#00ff80', '#00ffff', '#80ff00', '#8000ff'];
+    const colors = ['#0080ff', '#d928d9', '#ff0080', '#38af74', '#31afaf', '#77ca23', '#8000ff'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
