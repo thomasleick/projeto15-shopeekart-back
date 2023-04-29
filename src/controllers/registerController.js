@@ -1,9 +1,11 @@
 const userService = require('../services/userService')
+const avatarService = require('../services/avatarService')
 
 const registerUser = async (req, res) => {
     try {
         const { name, email, pwd } = req.body
-        const user = await userService.createUser({ name, email, pwd })
+        const avatar = avatarService.generateAvatar(name);
+        const user = await userService.createUser({ name, email, pwd, avatar })
         res.status(201).json({ message: 'User registered successfully' })
     } catch (err) {
         // Handle validation errors

@@ -33,6 +33,7 @@ const handleLogin = async (req, res) => {
 
             return res.json({
                 name: foundUser.name,
+                avatar: foundUser.avatar,
                 accessToken,
             })
         } else {

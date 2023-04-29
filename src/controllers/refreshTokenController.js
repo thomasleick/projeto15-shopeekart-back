@@ -11,6 +11,7 @@ const handleRefreshToken = async (req, res) => {
 
     res.json({
         name: foundUser.name,
+        avatar: foundUser.avatar,
         accessToken,
     })
 }
