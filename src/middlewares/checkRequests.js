@@ -20,4 +20,17 @@ const checkRequestLogin = (req, res, next) => {
     next()
 }
 
-module.exports = { checkRequestRegister, checkRequestLogin }
+const checkRequestChangePassword = (req, res, next) => {
+    if (!Object.keys(req.body.newpwd)) {
+        return res.status(400).json({ error: 'NewPwd is required on body' })
+    }
+    if (!Object.keys(req.body.pwd)) {
+        return res.status(400).json({ error: 'Pwd is required on body' })
+    }
+    if (!Object.keys(req.id)) {
+        return res.status(400).json({ error: 'Couldnt get id from the jwt' })
+    }
+    next()
+}
+
+module.exports = { checkRequestRegister, checkRequestLogin, checkRequestChangePassword }
