@@ -11,4 +11,9 @@ const findUserByEmail = async (email) => {
     return user
 }
 
-module.exports = { createUser, findUserByEmail }
+const findUserById = async (_id) => {
+    const user = await User.findOne({ _id })
+    return user
+}
+
+module.exports = { createUser, findUserByEmail, findUserById }

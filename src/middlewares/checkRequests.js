@@ -27,7 +27,7 @@ const checkRequestChangePassword = (req, res, next) => {
     if (!Object.keys(req.body.pwd)) {
         return res.status(400).json({ error: 'Pwd is required on body' })
     }
-    if (!Object.keys(req.id)) {
+    if (!Object.keys(res.locals.user.id)) {
         return res.status(400).json({ error: 'Couldnt get id from the jwt' })
     }
     next()
