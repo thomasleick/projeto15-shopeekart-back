@@ -5,6 +5,8 @@ const {
     getLatestOrderOfUser,
 } = require('../services/orderService')
 
+const { getProduct } = require('../services/productService')
+
 const getOrdersOfUserController = async (req, res) => {
     const { id } = res.locals.user
 
@@ -54,6 +56,14 @@ const placeOrderController = async (req, res) => {
 
     try {
         const order = await placeOrder({ ...req.body, author: id })
+        const products = [] 
+
+        for (const product of req.body.products) {
+            const productInfo = await getProduct(product.product)
+            products.push({ count: product.count, product:productInfo})
+        }
+
+        console.log(products)
         return res.status(201).send(order)
     } catch (err) {
         console.error(err)
