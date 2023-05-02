@@ -1,36 +1,44 @@
 const checkRequestRegister = (req, res, next) => {
-    if (!Object.keys(req.body.name)) {
+    if (!Object.keys(req?.body?.name)) {
         return res.status(400).json({ error: 'Name is required on body' })
     }
-    if (!Object.keys(req.body.email)) {
+    if (!Object.keys(req?.body?.email)) {
         return res.status(400).json({ error: 'Email is required on body' })
     }
-    if (!Object.keys(req.body.pwd)) {
+    if (!Object.keys(req?.body?.pwd)) {
         return res.status(400).json({ error: 'Pwd is required on body' })
     }
     next()
 }
 const checkRequestLogin = (req, res, next) => {
-    if (!Object.keys(req.body.email)) {
+    if (!Object.keys(req?.body?.email)) {
         return res.status(400).json({ error: 'Email is required on body' })
     }
-    if (!Object.keys(req.body.pwd)) {
+    if (!Object.keys(req?.body?.pwd)) {
         return res.status(400).json({ error: 'Pwd is required on body' })
     }
     next()
 }
 
 const checkRequestChangePassword = (req, res, next) => {
-    if (!Object.keys(req.body.newpwd)) {
+    if (!Object.keys(req?.body?.newpwd)) {
         return res.status(400).json({ error: 'NewPwd is required on body' })
     }
-    if (!Object.keys(req.body.pwd)) {
+    if (!Object.keys(req?.body?.pwd)) {
         return res.status(400).json({ error: 'Pwd is required on body' })
     }
-    if (!Object.keys(res.locals.user.id)) {
-        return res.status(400).json({ error: 'Couldnt get id from the jwt' })
+    next()
+}
+const checkRequestResetPassword = (req, res, next) => {
+    if (!Object.keys(req?.body?.email)) {
+        return res.status(400).json({ error: 'Email is required on body' })
     }
     next()
 }
 
-module.exports = { checkRequestRegister, checkRequestLogin, checkRequestChangePassword }
+module.exports = {
+    checkRequestRegister,
+    checkRequestLogin,
+    checkRequestChangePassword,
+    checkRequestResetPassword,
+}

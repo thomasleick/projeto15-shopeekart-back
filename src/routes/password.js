@@ -8,6 +8,6 @@ const verifyJWT = require('../middlewares/verifyJWT')
 router.post('/change', verifyJWT, checkRequests.checkRequestChangePassword, passwordController.changePassword)
 
 // Reset password when not logged in
-router.post('/reset', passwordController.resetPassword)
+router.post('/reset', checkRequests.checkRequestResetPassword, passwordController.resetPassword)
 
 module.exports = router
