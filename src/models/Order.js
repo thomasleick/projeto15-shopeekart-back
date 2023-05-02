@@ -18,6 +18,7 @@ const orderSchema = new Schema({
         address: String,
         city: String,
         uf: String,
+        country: String,
         postalCode: String,
         _id: false,
     },
