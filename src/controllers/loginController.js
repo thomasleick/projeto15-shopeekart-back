@@ -34,6 +34,7 @@ const handleLogin = async (req, res) => {
             return res.json({
                 name: foundUser.name,
                 avatar: foundUser.avatar,
+                email: foundUser.email,
                 accessToken,
             })
         } else {
