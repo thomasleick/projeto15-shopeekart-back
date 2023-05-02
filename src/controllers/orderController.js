@@ -2,6 +2,7 @@ const {
     placeOrder,
     getOrdersOfUser,
     getSingleOrderOfUser,
+    getLatestOrderOfUser,
 } = require('../services/orderService')
 
 const getOrdersOfUserController = async (req, res) => {
@@ -10,6 +11,20 @@ const getOrdersOfUserController = async (req, res) => {
     try {
         const orders = await getOrdersOfUser(id)
         return res.send(orders)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send(err)
+    }
+}
+
+const getLatestOrderOfUserController = async (req, res) => {
+    const { id } = res.locals.user
+
+    try {
+        const lastOrder = await getLatestOrderOfUser(id)
+        if (lastOrder === null)
+            return res.sendStatus(204)
+        return res.send(lastOrder)
     } catch (err) {
         console.error(err)
         res.status(500).send(err)
@@ -50,4 +65,5 @@ module.exports = {
     getOrdersOfUserController,
     getSingleOrderOfUserController,
     placeOrderController,
+    getLatestOrderOfUserController,
 }

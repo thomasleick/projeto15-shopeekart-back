@@ -30,5 +30,8 @@ const placeOrder = async (order) => {
     await placedOrder.populate('shipmentInfo')
     return placedOrder
 }
-
-module.exports = { getOrdersOfUser, getSingleOrderOfUser, placeOrder }
+const getLatestOrderOfUser = async (userId) => {
+    const latestOrder = await Order.findOne({ author: userId }).sort({ placedAt: -1 });
+    return latestOrder || null;
+}
+module.exports = { getOrdersOfUser, getSingleOrderOfUser, placeOrder, getLatestOrderOfUser }
