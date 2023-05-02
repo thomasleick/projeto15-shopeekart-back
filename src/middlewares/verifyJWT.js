@@ -7,7 +7,10 @@ const verifyJWT = (req, res, next) => {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) return res.sendStatus(403) //invalid token
-        res.locals.user = { id: decoded.UserInfo.id }
+        res.locals.user = {
+            id: decoded.UserInfo.id,
+            email: decoded.UserInfo.email,
+        }
         next()
     })
 }
