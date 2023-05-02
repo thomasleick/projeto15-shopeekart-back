@@ -55,9 +55,9 @@ const verifyRefreshToken = async (refreshToken) => {
             return false
         }
         const accessToken = generateAccessToken({
-            name: decoded.name,
-            email: decoded.email,
-            id: decoded._id,
+            name: foundUser.name,
+            email: foundUser.email,
+            id: foundUser._id,
         })
         return { foundUser, accessToken }
     } catch (error) {
